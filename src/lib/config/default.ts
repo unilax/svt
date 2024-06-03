@@ -1,3 +1,5 @@
+import * as props from '$lib/config/imports/props.js';
+
 export const config = {
 	strategy: {
 		override: false
@@ -28,5 +30,6 @@ export const config = {
 			'rose'
 		],
 		base: ['slate', 'cool', 'zinc', 'neutral', 'stone']
-	}
+	},
+	components: props
 };

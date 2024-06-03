@@ -1,3 +1,7 @@
-<h1 class="bg-red-500">Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { UButton } from '$lib/index.js';
+</script>
+
+<div class="bg-primary-600">
+	<UButton label="Shimmy" />
+</div>
