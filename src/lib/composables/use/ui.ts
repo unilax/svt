@@ -1,7 +1,7 @@
-import type { DeepStyle, Styles } from '$lib/types/utility.js';
-import { stringify } from '$lib/utils/index.js';
 import { twJoin } from 'tailwind-merge';
+import type { DeepStyles } from '$lib/types/index.js';
 
+// Array of allowed keys in the ClassType interface
 const classTypeKeys = new Set([
 	'layout',
 	'flex',
@@ -35,7 +35,6 @@ function merger(older: string, newer: string, override: boolean): string {
 	return override ? newer : twJoin(older, newer);
 }
 
-
 /**
  * Merges the given styles and oclass objects.
  * @template T - The type of the styles object.
@@ -44,15 +43,15 @@ function merger(older: string, newer: string, override: boolean): string {
  * @returns {{ css: T; classer: string }} - The merged styles and class string.
  */
 export function useUI<T extends Record<string, any>>(
-	styles: string| T,
-	oclass: string | DeepStyle<T>
+	styles: T,
+	oclass: string | DeepStyles<T>,
+	override: boolean
 ): { css: T; classer: string } {
 	let classer: string = '';
-	let css: T =  styles ;
-	const override: boolean = false;
+	let css: T = { ...styles };
 
-	if (typeof oclass === 'string' || typeof styles === 'string') {
-		classer = typeof oclass === 'string'? oclass: '';
+	if (typeof oclass === 'string') {
+		classer = oclass;
 		return { css, classer };
 	}
 
@@ -62,35 +61,12 @@ export function useUI<T extends Record<string, any>>(
 			const oclassKid = oclass[key];
 
 			if (typeof stylesKid === 'object' && typeof oclassKid === 'object') {
-				css[key] = useUI(stylesKid, oclassKid as DeepStyle<typeof stylesKid>).css;
+				css[key] = useUI(stylesKid, oclassKid as DeepStyles<typeof stylesKid>, override).css;
 			} else if (typeof oclassKid === 'string' && classTypeKeys.has(key)) {
 				css[key] = merger(stylesKid, oclassKid, override) as any;
 			}
 		}
 	}
+
 	return { css, classer };
-}
-
-
-export function useStyles<T extends Record<string, any>>(
-	styles: string | T,
-	_class: string | DeepStyle<T>,
-	override: boolean
-): {
-	css: T;
-	classer: string;
-	strify: Function;
-} {
-	if (typeof styles === 'string') {
-		return {
-			css: {} as T,
-			classer: 'sadr',
-			strify: stringify
-		};
-	}
-	return {
-		css: styles,
-		classer: 'none',
-		strify: stringify
-	};
 }

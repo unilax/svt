@@ -1,35 +1,49 @@
 <script lang="ts">
 	/** Imports */
-	import { useProps, useStyles } from '$lib/index.js';
+	import { useProps, useUI } from '$lib/index.js';
+    import { strify, twJoin, varify } from '$lib/utils/index.js'
+	import { button } from './button.js';
 
-	/** Props */
+	/** Props  */
 	const props = useProps('Button');
-	let _class: typeof props.class = {};
+    let _class: typeof props.class = {};
 	export { _class as class };
-	export let label = props.label;
+    export let override = props.override;
 	export let href = props.href;
-	export let override = props.override;
+	export let loading = props.loading;
+	export let disabled = props.disabled;
+	export let label = props.label;
+	export let color = props.color;
 
-	/** Logic */
-	const { css, classer, strify } = useStyles(props.class, _class, override);
-
+    /** Logic */
+   
 	/** React */
 	$: isLeading = $$slots.leading;
 	$: isTrailing = $$slots.trailing;
 	$: isDefault = $$slots.default || label;
+
+    /** CSS & UI */
+    const { css, classer } = useUI(button, _class, override)
+    $: rootUI = twJoin(strify(
+        css.root,
+		varify(css.opt.variant['solid'], color)
+    ), classer)
+    
+
 </script>
 
 <svelte:element
 	this={href ? 'a' : 'button'}
 	role="button"
 	tabindex={0}
+	disabled={disabled || loading}
 	{href}
-	on:click
 	on:change
 	on:keydown
 	on:keyup
 	on:mouseenter
 	on:mouseleave
+    class={rootUI}
 	{...$$restProps}
 >
 	{#if isLeading}

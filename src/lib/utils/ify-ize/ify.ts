@@ -13,6 +13,7 @@ import type { Utility, Styles } from '$lib/types/utility.js';
 export function stylify<T extends Styles>(styles: T): T {
 	return styles as T;
 }
+export { stringify as strify };
 
 /**
  * Type definition for a variant object.
@@ -45,7 +46,7 @@ export function variantify(variant: Variant, color: any): Utility {
 	// Return the `ClassType` associated with the specified color.
 	return variant[color];
 }
-
+export { variantify as varify }
 /**
 /**
  * Converts multiple objects into a single string by concatenating non-object property values.

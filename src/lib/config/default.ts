@@ -27,8 +27,14 @@ export const config = {
 			'purple',
 			'fuchsia',
 			'pink',
-			'rose'
-		],
+			'rose',
+			/** added */
+			'primary',
+			'success',
+			'warning',
+			'danger',
+
+		] as const,
 		base: ['slate', 'cool', 'zinc', 'neutral', 'stone']
 	},
 	components: props

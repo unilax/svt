@@ -115,8 +115,8 @@ export interface Props {
 /**
  * Define a type for deeply nested styles, merging with ClassUtility
  */
-export type DeepStyle<T> = {
-	[K in keyof T]?: T[K] extends object ? DeepStyle<T[K]> & ClassUtility : T[K];
+export type DeepStyles<T> = {
+	[K in keyof T]?: T[K] extends object ? DeepStyles<T[K]> & ClassUtility : T[K];
 };
 
 /**
