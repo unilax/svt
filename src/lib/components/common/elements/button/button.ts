@@ -1,7 +1,7 @@
 import type { DeepStyles, Props, Colors } from '$lib/types/index.js';
 
 export const props = {
-	class: {} as string | DeepStyles<typeof button>,
+	class: {} as string | DeepStyles<typeof styles>,
 	override: false,
 	loading: false,
 	disabled: false,
@@ -11,7 +11,7 @@ export const props = {
 
 } satisfies Props;
 
-export const button = {
+export const styles = {
 	root: {
 		flex: 'flex-shrink-0 items-center',
 		border: 'focus:outline-none focus-visible:outline-0',

@@ -11,6 +11,7 @@ export default function (): Partial<Config> {
 				colors: {
 					primary: colors.sky,
 					gray: colors.neutral,
+					color: colors.sky,
 					success: colors.green,
 					warning: colors.yellow,
 					danger: colors.red

@@ -2,7 +2,7 @@
 	/** Imports */
 	import { useProps, useUI } from '$lib/index.js';
     import { strify, twJoin, varify } from '$lib/utils/index.js'
-	import { button } from './button.js';
+	import { styles } from './button.js';
 
 	/** Props  */
 	const props = useProps('Button');
@@ -23,13 +23,12 @@
 	$: isDefault = $$slots.default || label;
 
     /** CSS & UI */
-    const { css, classer } = useUI(button, _class, override)
+    const { css, classer } = useUI(styles, _class, override)
     $: rootUI = twJoin(strify(
         css.root,
 		varify(css.opt.variant['solid'], color)
     ), classer)
     
-
 </script>
 
 <svelte:element
