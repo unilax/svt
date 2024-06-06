@@ -46,7 +46,7 @@ export function variantify(variant: Variant, color: any): Utility {
 	// Return the `ClassType` associated with the specified color.
 	return variant[color];
 }
-export { variantify as varify }
+export { variantify as varify };
 /**
 /**
  * Converts multiple objects into a single string by concatenating non-object property values.

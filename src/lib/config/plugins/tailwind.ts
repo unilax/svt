@@ -1,5 +1,4 @@
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
-import forms from '@tailwindcss/forms';
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors.js';
 export default function (): Partial<Config> {
@@ -7,6 +6,13 @@ export default function (): Partial<Config> {
 		darkMode: 'class',
 		content: ['./src/**/*.{html,js,svelte,ts}'],
 		theme: {
+			container: {
+				center: true,
+				padding: '2rem',
+				screens: {
+					'2xl': '1536px'
+				}
+			},
 			extend: {
 				colors: {
 					primary: colors.sky,
@@ -19,7 +25,7 @@ export default function (): Partial<Config> {
 			}
 		},
 		plugins: [
-			forms({ strategy: 'class' }),
+			require('@tailwindcss/forms'),
 			iconsPlugin({
 				collections: getIconCollections(['fluent']),
 				scale: 1.5

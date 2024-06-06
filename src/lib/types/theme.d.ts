@@ -1,4 +1,4 @@
-import { useConfig } from "$lib/composables/use/config.ts";
+import { useConfig } from '$lib/composables/use/config.ts';
 
 const { colors } = useConfig();
 

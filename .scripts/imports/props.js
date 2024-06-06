@@ -20,9 +20,9 @@ const generateImports = (dirPath, imports = [], level = 0) => {
 				imports.push(`\n// ${file}`);
 			}
 			imports = generateImports(filePath, imports, level + 1);
-		} else if (file.endsWith('.ts')) {
+		} else if (file.endsWith('.config.ts')) {
 			const componentDir = path.basename(path.dirname(filePath));
-			const fileNameWithoutExtension = path.basename(file, '.ts');
+			const fileNameWithoutExtension = path.basename(file, '.config.ts');
 			const pascalCaseDirName = toPascalCase(componentDir);
 			let importName;
 
