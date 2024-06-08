@@ -10,24 +10,25 @@ export const props = {
 
 const styles = {
 	root: {
-		spacing: 'mx-auto p-6 lg:px-8',
-		flex: '[&>*>*[data-flex=true]]:hidden [&>*>*[data-flex=true]]:lg:flex'
+		//spacing: 'mx-auto p-6 lg:px-8',
+		//flex: '[&>*>*[data-flex=true]]:hidden [&>*>*[data-flex=true]]:lg:flex'
 	},
 	nav: {
 		flex: ' flex justify-between items-center  gap-x-6',
 		sizing: 'max-w-screen-2xl ',
-		east: {
-			flex: 'flex items-center',
-			sizing: 'w-fit',
-			typography: 'font-semibold'
+		logo: {
+			flex: 'flex lg:flex-1 font-semibold items-center text-lg'
 		},
-		center: {
-			flex: 'grow justify-center gap-x-6 '
+		links: {
+			flex: 'hidden lg:flex lg:gap-x-12'
 		},
-		west: {
-			custom: '[&>[data-flex=false]]:lg:hidden [&>[data-flex=true]]:lg:flex',
-			flex: 'flex justify-end items-center gap-x-6'
+		buttons: {
+			//custom: '[&>[data-flex=false]]:lg:hidden [&>[data-flex=true]]:lg:flex',
+			flex: 'flex flex-1 items-center justify-end gap-x-6'
 		}
+	},
+	drawer: {
+		flex: 'bg-white dark:bg-black/50 px-6 py-4 h-full w-full sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'
 	},
 	aside: {
 		flex: 'lg:hidden',

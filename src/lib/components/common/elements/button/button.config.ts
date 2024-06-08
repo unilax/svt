@@ -1,9 +1,10 @@
 import type { DeepStyles, Props, Colors, Styles } from '$lib/types/index.js';
 
 type ButtonColor = keyof typeof styles.opt.variant.solid;
+type ButtonVariant = keyof typeof styles.opt.variant;
 
 export const props = {
-	class: {} as string | DeepStyles<typeof styles>,
+	class: {} as string | DeepStyles<typeof button>,
 	override: false,
 	loading: false,
 	disabled: false,
@@ -12,10 +13,11 @@ export const props = {
 	label: '',
 	icon: {} as string | { east?: string; west?: string },
 	color: 'blaite' as Colors['mask'] | Exclude<ButtonColor, 'color'>,
+	variant: 'solid' as ButtonVariant,
 	size: 'md' as 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 } satisfies Props;
 
-export const styles = {
+const styles = {
 	root: {
 		flex: 'flex flex-shrink-0 items-center',
 		border: 'focus:outline-none focus-visible:outline-0',
@@ -74,6 +76,18 @@ export const styles = {
 					typography: 'text-white dark:text-gray-900',
 					effect: 'shadow-sm'
 				}
+			},
+			ghost: {
+				color: {
+					background: `hover:bg-color-50 dark:hover:bg-color-950 disabled:bg-transparent dark:disabled:bg-transparent`,
+					border: `focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-color-500`,
+					typography: 'text-color-500'
+				},
+				blaite: {
+					background: 'hover:bg-gray-100 dark:hover:bg-gray-800',
+					border: `focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500`,
+					typography: 'text-gray-900 dark:text-white'
+				}
 			}
 		}
 	},
@@ -86,3 +100,4 @@ export const styles = {
 		}
 	}
 } satisfies Styles;
+export const button = styles;

@@ -1,5 +1,10 @@
 
+// data
+
+// navigations
+
 // elements
+export { props as Accordion } from '../../components/common/elements/accordion/accordion.config.js';
 export { props as Button } from '../../components/common/elements/button/button.config.js';
 
 // forms

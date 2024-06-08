@@ -1,8 +1,8 @@
 <script lang="ts">
 	/** Imports */
-	import { UDrawer, useProps, useUI } from '$lib/index.js';
+	import { useProps, useUI } from '$lib/index.js';
 	import { strify, twJoin } from '$lib/utils/index.js';
-	import { UHeaderLinks } from '$lib/index.js';
+	import { UHeaderLinks, UDrawer } from '$lib/index.js';
 	import { header } from './header.config.js';
 
 	/** Props */
@@ -17,63 +17,62 @@
 	}
 
 	/** Logic */
+	let drawer: UDrawer;
 
 	/** UI */
 	const { css, classer } = useUI(header, _class, override);
 </script>
 
-<header data-hide="true" class={twJoin(strify(css.root), classer)}>
+<header class={twJoin(strify(css.root), classer)}>
 	<nav class={strify(css.nav)} aria-label="Global">
-		<a href="/" class={strify(css.nav.east)}>
-			<slot name="east">
-				<slot name="logo" />
-				{#if name}{name}{/if}
-			</slot>
+		<a href="/" class={strify(css.nav.logo)}>
+			<slot name="logo" />
+			{#if name}{name}{/if}
 		</a>
-		<div data-flex={true} class={strify(css.nav.center)}>
-			<slot><UHeaderLinks {links} /></slot>
+
+		<div class={strify(css.nav.links)}>
+			<UHeaderLinks {links} />
 		</div>
-		<div class={strify(css.nav.west)}>
-			<slot name="west" />
+
+		<div class={strify(css.nav.buttons)}>
+			<slot name="buttons" />
+		</div>
+
+		<div class="flex">
 			<slot name="menu">
-				<button data-flex={false} class="flex items-center" on:click={toggle}>
-					<span class="i-fluent-navigation-20-regular" />
+				<button on:click={drawer.toggle} type="button" class="flex justify-between items-center">
+					<span class="i-fluent-dismiss-20-regular" />
 				</button>
 			</slot>
 		</div>
 	</nav>
-
 	<UDrawer
-		bind:open
-		transition={{ content: { x: 400, duration: 100 } }}
-		class={{
-			content: {
-				flex: 'lg:hidden w-full space-y-6 divide-y divide-gray-500/10 h-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'
-			},
-			overlay: { flex: 'lg:hidden' }
-		}}
+		transition={{ content: { x: 250, duration: 100 } }}
+		bind:this={drawer}
+		class={strify(css.drawer)}
 	>
-		<div class={strify(css.aside.north)}>
-			<slot name="north">
-				<slot name="logo" />
-				<slot name="menu">
-					<button class="flex items-center" on:click={toggle}>
-						<span class="i-fluent-dismiss-20-regular" />
-					</button>
-				</slot>
-			</slot>
-		</div>
+		<div class="flex justify-between items-center gap-x-6">
+			<slot name="logo" />
 
-		<div class={strify(css.aside.panel)}>
-			<slot name="panel">
-				{#each links as link}
-					<a href="/" class={strify(css.aside.panel.ancor)}>{link.label}</a>
-				{/each}
-			</slot>
+			<button on:click={drawer.toggle} type="button" class="flex justify-between items-center">
+				<span class="i-fluent-dismiss-20-regular" />
+			</button>
 		</div>
-
-		<div class={strify(css.aside.south)}>
-			<slot name="west" />
+		<div class="mt-6 flow-root">
+			<div class="-my-6 divide-y divide-gray-600/10 dark:divide-gray-400/10">
+				<div class="space-y-2 py-6">
+					{#each links as link}
+						<a
+							href="/"
+							class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-950/50"
+							>{link.label}</a
+						>
+					{/each}
+				</div>
+				<div class="py-6 flex justify-center items-center w-full mx-auto gap-x-5">
+					<slot name="buttons" />
+				</div>
+			</div>
 		</div>
 	</UDrawer>
 </header>

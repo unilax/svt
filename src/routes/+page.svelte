@@ -1,18 +1,41 @@
 <script lang="ts">
-	import { UButton, UHeader } from '$lib/index.js';
-	import { useDark } from '$lib/index.js';
+	import { UHeader, useDark, UButton } from '$lib/index.js';
 	const dark = useDark();
-	const links = [{ label: 'Product' }, { label: 'Features' }, { label: 'Marketplace' }];
+	const links = [
+		{
+			label: 'Documentation',
+			href: '/getting-started'
+		},
+		{
+			label: 'Playground',
+			href: '/playground'
+		},
+		{
+			label: 'Roadmap',
+			href: '/roadmap'
+		},
+		{
+			label: 'Pro',
+			href: '/pro'
+		},
+		{
+			label: 'Releases',
+			href: 'https://github.com/nuxt/ui/releases',
+			target: '_blank'
+		}
+	];
 </script>
 
-<UHeader name="UI" {links}>
-	<span
-		slot="logo"
-		class="bg-black dark:bg-white i-fluent-developer-board-lightning-20-filled size-10"
-	/>
-
-	<svelte:fragment slot="west">
-		<a href="/" class="text-sm font-semibold leading-6 text-gray-900">Log in</a>
-		<UButton label="Sign up" />
-	</svelte:fragment>
-</UHeader>
+<section class="container p-4 flex-col bg-gray-50 dark:bg-gray-950 h-screen">
+	<UHeader name="UI" {links}>
+		<span
+			slot="logo"
+			class="i-fluent-developer-board-lightning-20-filled bg-black dark:bg-white size-10 -ml-1"
+		/>
+		<svelte:fragment slot="buttons">
+			<UButton color="blaite" variant="ghost" label="Log in" />
+			<UButton label="Sign up" />
+		</svelte:fragment>
+	</UHeader>
+	<button on:click={dark.toggle}>Mode</button>
+</section>

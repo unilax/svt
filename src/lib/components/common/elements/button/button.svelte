@@ -2,7 +2,7 @@
 	/** Imports */
 	import { useProps, useUI, type DeepStyles } from '$lib/index.js';
 	import { strify, twJoin, varify } from '$lib/utils/index.js';
-	import { styles } from './button.config.js';
+	import { button } from './button.config.js';
 
 	/** Props  */
 	const props = useProps('Button');
@@ -15,6 +15,7 @@
 	export let disabled = props.disabled;
 	export let label = props.label;
 	export let color = props.color;
+	export let variant = props.variant;
 	export let size = props.size;
 	export let circle = props.circle;
 
@@ -26,13 +27,13 @@
 	};
 
 	/** UI */
-	const { css, classer } = useUI(styles, _class, override);
+	const { css, classer } = useUI(button, _class, override);
 	$: ui = {
 		root: twJoin(
 			strify(
 				css.root,
 				css.opt.size[size],
-				varify(css.opt.variant['solid'], color),
+				varify(css.opt.variant[variant], color),
 				circle ? css.is.circle : {}
 			),
 			classer
