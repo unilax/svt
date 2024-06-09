@@ -1,15 +1,31 @@
 <script lang="ts">
+	/** Imports */
 	import { strify, twJoin } from '$lib/utils/index.js';
-	import type { Styles, Props, DeepStyles } from '$lib/types/utility.js';
+	import { headerLinks, props } from './links.js';
+	import { useUI } from '$lib/index.js';
 
-	export let links: any[] = [];
-	const styles = {
-		root: {
-			flex: 'cursor-pointer text-gray-900 dark:text-white text-sm font-semibold flex items-center gap-1'
-		}
-	} satisfies Styles;
+	/** Props */
+	let _class = props.class;
+	export let override = props.override;
+	export let links = props.links;
+	export let vertical = props.vertical;
+
+	/** Logic */
+	$: is = {
+		vertical: vertical
+	};
+
+	/** UI */
+	const { css, classer } = useUI(headerLinks, _class, override);
+	$: ui = {
+		root: twJoin(strify(css.root, css.opt.mode[is.vertical ? 'vertical' : 'horizontal']), classer)
+	};
 </script>
 
-{#each links as link}
-	<a href="/" class={strify(styles.root)}>{link?.label}</a>
-{/each}
+<ul class={ui.root}>
+	{#each links as link}
+		<li class={strify(css.list)}>
+			<a href="/" class={strify(css.list.ancor)}>{link?.label}</a>
+		</li>
+	{/each}
+</ul>

@@ -54,6 +54,7 @@
 			use:melt={$content}
 			class={twJoin(strify(css.content), classer)}
 			transition:fly={transition.content}
+			{...$$restProps}
 		>
 			<slot />
 		</div>

@@ -30,7 +30,7 @@ const styles = {
 				typography: 'text-sm/6 font-semibold truncate',
 				sizing: 'w-full',
 				border: 'focus-visible:outline-primary border-l border-transparent',
-				spacing: '-ml-px pl-3.5',
+				spacing: '-ml-px ',
 				first: {}
 			},
 			content: {

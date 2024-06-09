@@ -18,24 +18,22 @@
 	export let variant = props.variant;
 	export let size = props.size;
 	export let circle = props.circle;
+	export let square = props.square;
 
 	/** Logic */
 	$: is = {
 		east: $$slots.east || loading,
 		west: $$slots.west,
-		default: $$slots.default || label
+		default: $$slots.default || label,
+		circle,
+		square
 	};
 
 	/** UI */
 	const { css, classer } = useUI(button, _class, override);
 	$: ui = {
 		root: twJoin(
-			strify(
-				css.root,
-				css.opt.size[size],
-				varify(css.opt.variant[variant], color),
-				circle ? css.is.circle : {}
-			),
+			strify(css.root, css.opt.size[size], varify(css.opt.variant[variant], color)),
 			classer
 		),
 		icon: {
@@ -52,7 +50,8 @@
 	tabindex={0}
 	disabled={disabled || loading}
 	{href}
-	data-circle={circle}
+	data-circle={String(is.circle)}
+	data-square={String(is.square)}
 	on:click
 	on:change
 	on:keydown

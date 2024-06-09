@@ -9,6 +9,7 @@ export const props = {
 	loading: false,
 	disabled: false,
 	circle: false,
+	square: false,
 	href: '',
 	label: '',
 	icon: {} as string | { east?: string; west?: string },
@@ -26,40 +27,37 @@ const styles = {
 		typography: 'font-semibold',
 		sizing: '[&>[data-slot=icon]]:size-5'
 	},
-	is: {
-		circle: { border: '!rounded-full' }
-	},
 	opt: {
 		size: {
 			xs: {
 				flex: 'gap-x-1',
 				typography: 'text-xs',
-				spacing: 'px-2 py-1',
-				border: 'rounded'
+				spacing: 'px-2 py-1 data-[square=true]:px-1',
+				border: 'rounded data-[circle=true]:rounded-full'
 			},
 			sm: {
 				flex: 'gap-x-1',
 				typography: 'text-sm',
-				spacing: 'px-2 py-1',
+				spacing: 'px-2 py-1 data-[square=true]:px-1',
 				border: 'rounded'
 			},
 			md: {
 				flex: 'gap-x-1.5',
 				typography: 'text-sm',
-				spacing: 'px-2.5 py-1.5',
-				border: 'rounded-md'
+				spacing: 'px-2.5 py-1.5 data-[square=true]:px-1.5',
+				border: 'rounded-md data-[circle=true]:rounded-full'
 			},
 			lg: {
 				flex: 'gap-x-2',
 				typography: 'text-sm',
-				spacing: 'px-3 py-2',
-				border: 'rounded-md'
+				spacing: 'px-3 py-2 data-[square=true]:px-2',
+				border: 'rounded-md data-[circle=true]:rounded-full'
 			},
 			xl: {
 				flex: 'gap-x-2',
 				typography: 'text-base',
-				spacing: 'px-3 py-2',
-				border: 'rounded-md'
+				spacing: 'px-3 py-2 data-[square=true]:px-2',
+				border: 'rounded-md data-[circle=true]:rounded-full'
 			}
 		},
 		variant: {
@@ -76,25 +74,13 @@ const styles = {
 					typography: 'text-white dark:text-gray-900',
 					effect: 'shadow-sm'
 				}
-			},
-			ghost: {
-				color: {
-					background: `hover:bg-color-50 dark:hover:bg-color-950 disabled:bg-transparent dark:disabled:bg-transparent`,
-					border: `focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-color-500`,
-					typography: 'text-color-500'
-				},
-				blaite: {
-					background: 'hover:bg-gray-100 dark:hover:bg-gray-800',
-					border: `focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500`,
-					typography: 'text-gray-900 dark:text-white'
-				}
 			}
 		}
 	},
 	attr: {
 		icon: {
 			load: {
-				svg: '',
+				svg: 'i-fluent-arrow-sync-20-regular',
 				motion: 'animate-spin'
 			}
 		}

@@ -10,3 +10,9 @@ export interface Colors {
 	mask: (typeof colors.mask)[number];
 	base: BaseColors;
 }
+
+/**
+ * Define size options
+ */
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
